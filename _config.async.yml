@@ -19,7 +19,7 @@ user:
   last_name: Wang # 姓
   email: # email | 电子邮箱
   domain: 站点域名 # Domain | 站点域名
-  avatar: /img/userimg.jpg # Avatar | 站点头像
+  avatar: public/img/userimg.jpg # Avatar | 站点头像
   describe: 网站简介。 # Describe | 网站简介
 
 # Individually configured friend link information | 友链说明配置
@@ -110,7 +110,7 @@ banner:
     fit: cover # 同 CSS object-fit
   index: ## 首页横幅
     type: video # 横幅类型 <[img,slideshow,video]>
-    bgurl: /img/index.mp4 # 背景图地址
+    bgurl: public/img/index.mp4 # 背景图地址
     banner_title: 树深时见鹿，<br>溪午不闻钟。
     banner_text: Hi my new friend!
     video_url:  # 视频地址
