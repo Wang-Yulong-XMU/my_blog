@@ -19,7 +19,7 @@ user:
   last_name: Wang # 姓
   email: # email | 电子邮箱
   domain: 站点域名 # Domain | 站点域名
-  avatar: img/userimg.jpg  # img | 站点头像
+  avatar: img/banner.png  # img | 站点头像
   describe: 网站简介。 # Describe | 网站简介
 
 # Individually configured friend link information | 友链说明配置
