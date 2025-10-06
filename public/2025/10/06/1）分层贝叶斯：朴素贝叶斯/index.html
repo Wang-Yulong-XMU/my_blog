@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="🚀 分层贝叶斯（一）：朴素贝叶斯引言：当“信念”遇到“数据”在日常生活中，我们经常根据新的观察来修正自己的看法或信念。贝叶斯方法正是将这种人类的认知过程——信念的更新——用严谨的数学公式固定下来。 在机器学习和统计学中，贝叶斯定理提供了一个强大的框架来量化不确定性，并根据数据对模型参数进行推断。 我们将从最简单的 朴素贝叶斯（Naive Bayes） 分类器入手，通过一个经典的抛硬币实验，先彻底">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分层贝叶斯（1）：朴素贝叶斯">
+<meta property="og:url" content="http://example.com/2025/10/06/1%EF%BC%89%E5%88%86%E5%B1%82%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="🚀 分层贝叶斯（一）：朴素贝叶斯引言：当“信念”遇到“数据”在日常生活中，我们经常根据新的观察来修正自己的看法或信念。贝叶斯方法正是将这种人类的认知过程——信念的更新——用严谨的数学公式固定下来。 在机器学习和统计学中，贝叶斯定理提供了一个强大的框架来量化不确定性，并根据数据对模型参数进行推断。 我们将从最简单的 朴素贝叶斯（Naive Bayes） 分类器入手，通过一个经典的抛硬币实验，先彻底">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="article:published_time" content="2025-10-06T08:55:00.000Z">
+<meta property="article:modified_time" content="2025-10-06T08:59:06.208Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/404.jpg">
+
+
+<title >分层贝叶斯（1）：朴素贝叶斯</title>
+
+<!-- Favicon -->
+
+    <link href='/img/file.svg?v=2.2.6' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/file.svg?v=2.2.6' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"John Doe","root":"/","typed_text":["Master of AI","AI for science Learner"],"theme_version":"2.2.6","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/file.svg","icon16":"/img/file.svg","icon32":"/img/file.svg","apple_touch_icon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","show_text":null,"hide_text":"王钰龙的个人博客"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","sticky":"TOP","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"","prefix":"The blog has been lovely to run undefined day"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2025-10-06 16:59:06"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.6" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+ 
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/file.svg">
+    
+    
+        <div class="trm-logo-text">
+            Wang<span>Yulong</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    Home
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    Archives
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/photo/" target="">
+                    photos
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    About
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/bys.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            分层贝叶斯（1）：朴素贝叶斯
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2025
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/userimg.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        WangYulong
+    </h5>
+    
+        <div class="trm-label">
+            I`m
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/Wang-Yulong-XMU" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="https://www.zhihu.com/people/mockingbird-2-73" title="ZhiHu" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-zhihu"></i>
+        </a>
+    
+        <a href="https://gitee.com/hubu_wyl" title="gitee" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-git"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                XiaMen
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                School:
+            </div>
+            <div class="trm-label trm-label-light">
+                XiaMen University
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                Age:
+            </div>
+            <div class="trm-label trm-label-light">
+                22
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            10/06
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            16:55
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            John Doe
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="🚀-分层贝叶斯（一）：朴素贝叶斯"><a href="#🚀-分层贝叶斯（一）：朴素贝叶斯" class="headerlink" title="🚀 分层贝叶斯（一）：朴素贝叶斯"></a>🚀 分层贝叶斯（一）：朴素贝叶斯</h1><h2 id="引言：当“信念”遇到“数据”"><a href="#引言：当“信念”遇到“数据”" class="headerlink" title="引言：当“信念”遇到“数据”"></a>引言：当“信念”遇到“数据”</h2><p>在日常生活中，我们经常根据新的观察来修正自己的看法或信念。<strong>贝叶斯方法</strong>正是将这种人类的认知过程——<strong>信念的更新</strong>——用严谨的数学公式固定下来。</p>
+<p>在机器学习和统计学中，贝叶斯定理提供了一个强大的框架来<strong>量化不确定性</strong>，并根据数据对模型参数进行推断。</p>
+<p>我们将从最简单的 <strong>朴素贝叶斯（Naive Bayes）</strong> 分类器入手，通过一个经典的<strong>抛硬币实验</strong>，先彻底理解贝叶斯公式中的三大核心要素：<strong>先验、似然和后验</strong>。</p>
+<hr>
+<h2 id="一、引子：抛硬币实验"><a href="#一、引子：抛硬币实验" class="headerlink" title="一、引子：抛硬币实验"></a>一、引子：抛硬币实验</h2><p>想象你手里有一枚硬币，您想知道它<strong>正面向上的真实概率</strong> $\theta$ 是多少。这个 $\theta$ 就是我们模型中的<strong>参数（Parameter）</strong>，它是我们想要推断的、不可直接观测的“真相”。</p>
+<h3 id="1-初始信念：先验分布-P-theta"><a href="#1-初始信念：先验分布-P-theta" class="headerlink" title="1. 初始信念：先验分布 $P(\theta)$"></a>1. 初始信念：先验分布 $P(\theta)$</h3><p>在抛硬币之前，我们对这枚硬币的真实概率 $\theta$ 是有<strong>初始信念</strong>（即先验）的。</p>
+<ul>
+<li><strong>概念：</strong> <strong>先验分布（Prior Distribution）</strong> $P(\theta)$ 描述了在观测到任何数据之前，我们对参数 $\theta$ <strong>所有可能取值的不确定性</strong>和<strong>初始信念</strong>。</li>
+<li><strong>数学形式：</strong> <strong>先验必须是一个概率分布（Distribution），而非单个数值。</strong> 它用数学函数量化了我们认为 $\theta$ 更可能在哪个范围（如 $\text{Beta}(1, 1)$ 表示均匀分布，即对 $\theta$ 一无所知）。在抛硬币这里，出于经验学，我们可以认为真实概率 $\theta$不会过多的偏离0.5，这即为先验。</li>
+</ul>
+<h3 id="2-数据支持度：似然函数-P-D-theta"><a href="#2-数据支持度：似然函数-P-D-theta" class="headerlink" title="2. 数据支持度：似然函数 $P(D|\theta)$"></a>2. 数据支持度：似然函数 $P(D|\theta)$</h3><p>假设我们观察到了这样的一个事实：抛了 $N$ 次硬币，得到了 $k$ 次正面（数据 $D$）。</p>
+<ul>
+<li><strong>概念：</strong> <strong>似然函数（Likelihood Function）</strong> $P(D|\theta)$ 描述了在<strong>给定一个特定的参数 $\theta$ 时</strong>，观测到当前这组数据 $D$ 的<strong>概率值</strong>。</li>
+<li><strong>作用：</strong> 它是数据对不同 $\theta$ 值的<strong>支持度</strong>。似然值越高，表明这个 $\theta$ 值越能解释我们观察到的数据。</li>
+<li><strong>注意：</strong> 似然 $P(D|\theta)$ 本质上是一个关于 $\theta$ 的函数，它<strong>不要求归一化</strong>，<strong>不</strong>是一个关于 $\theta$ 的概率分布。</li>
+</ul>
+<p>在这个引子中，案例：如何计算似然 $P(D|\theta)$ 抛硬币的数据生成过程符合<strong>二项分布（Binomial Distribution）</strong>。<br>似然函数 $P(D|\theta)$ 的数学形式是：<br><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2025-10-06-16-41-21-image.png"  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="3-更新后的信念：后验分布-P-theta-D"><a href="#3-更新后的信念：后验分布-P-theta-D" class="headerlink" title="3. 更新后的信念：后验分布 $P(\theta|D)$"></a>3. 更新后的信念：后验分布 $P(\theta|D)$</h3><p>结合了的初始信念（先验）和观测到的数据（似然）后，我们对 $\theta$ 的认识得到了修正。</p>
+<ul>
+<li><strong>概念：</strong> <strong>后验分布（Posterior Distribution）</strong> $P(\theta|D)$ 描述了在观测到数据 $D$ 之后，我们对参数 $\theta$ <strong>更新后的信念</strong>。</li>
+<li><strong>物理意义：</strong> 后验分布是<strong>先验信息</strong>和<strong>数据信息</strong>（似然）之间<strong>妥协和整合</strong>的结果。数据量越少，后验越接近先验；数据量越大，后验越由数据（似然）主导。</li>
+</ul>
+<hr>
+<h2 id="二、贝叶斯定理与朴素贝叶斯公式"><a href="#二、贝叶斯定理与朴素贝叶斯公式" class="headerlink" title="二、贝叶斯定理与朴素贝叶斯公式"></a>二、贝叶斯定理与朴素贝叶斯公式</h2><h3 id="1-贝叶斯定理：信念更新的公式"><a href="#1-贝叶斯定理：信念更新的公式" class="headerlink" title="1. 贝叶斯定理：信念更新的公式"></a>1. 贝叶斯定理：信念更新的公式</h3><p>这三个概念通过贝叶斯定理联系起来：</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2025-10-06-16-44-21-image.png"  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>公式中的分母 $P(D)$ 被称为<strong>证据（Evidence）</strong> 或<strong>边缘似然（Marginal Likelihood）</strong>。</p>
+<h3 id="2-证据-P-D-的作用与意义"><a href="#2-证据-P-D-的作用与意义" class="headerlink" title="2. 证据 $P(D)$ 的作用与意义"></a>2. 证据 $P(D)$ 的作用与意义</h3><ul>
+<li><strong>作用：</strong> $P(D)$ 的作用是确保后验分布 $P(\theta|D)$ 的总积分等于 1（即归一化常数）。</li>
+<li><strong>推断聚焦：</strong> 在推断参数 $\theta$ 的后验分布时，我们通常只关注分子即似然函数和先验的联合概率密度，因为<strong>后验的形状</strong>完全由分子决定：<br><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2025-10-06-16-45-18-image.png"  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></li>
+<li><strong>模型选择意义：</strong> 证据 $P(D)$ 的数值大小，直接决定了该模型在解释观测数据方面的好坏程度。</li>
+</ul>
+<h3 id="3-朴素贝叶斯的“理想性”"><a href="#3-朴素贝叶斯的“理想性”" class="headerlink" title="3. 朴素贝叶斯的“理想性”"></a>3. 朴素贝叶斯的“理想性”</h3><p>朴素贝叶斯分类器应用贝叶斯定理来计算给定特征 $X$ 时属于类别 $C$ 的概率 $P(C|X)$。</p>
+<ul>
+<li><strong>核心问题：</strong> 在实际分类问题中，计算 $P(X|C)$（似然）非常复杂，因为特征 $X &#x3D; {x_1, x_2, \dots, x_n}$ 通常有很多维度且相互关联。</li>
+<li><strong>朴素的简化：</strong> 朴素贝叶斯模型做了一个<strong>理想性</strong>假设：<strong>给定类别 $C$ 的条件下，所有特征 $x_i$ 之间是相互独立的。</strong></li>
+</ul>
+<p><img src="C:\Users\Administrator\AppData\Roaming\marktext\images\2025-10-06-16-45-43-image.png"  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>虽然这个独立性假设在现实中<strong>几乎不可能完全成立</strong>（因此被称为“朴素”），但它极大地简化了计算，使得朴素贝叶斯在文本分类等简单场景中依然非常高效和实用。</p>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2025/10/06/welcome%20to%20my%20blog/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E9%9A%8F%E7%AC%94/">
+                    随笔
+                </a>
+            </div>
+            <h5>
+                <a href="/2025/10/06/welcome%20to%20my%20blog/" class="trm-anima-link">
+                    欢迎来到我的博客！
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>25/10/06</li>
+                <li>13:00</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-footer-card trm-scroll-animation">
+
+    
+
+    
+
+      
+
+     
+
+    
+        <div class="trm-footer-item">
+            特别致谢：本博客采用开源主题Hexo-Theme-Async驱动，感谢所有开源开发者。
+        </div>
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+            
+<div class="trm-fixed-container">
+    
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.2.6"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.2.6"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>

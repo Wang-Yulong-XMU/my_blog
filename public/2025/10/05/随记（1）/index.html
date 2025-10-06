@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="海水养殖碳足迹垂直大模型尚未解决的一些问题 多值问题：当检索到的投入品有多个取值时，如何计算取值（平均，加权平均？）  投入品名称问题：当多个检索文档检索到同一类投入品时，往往因为投入品具体名称不同而分成不同类投入品建立清单（如尼龙6，尼龙，尼龙绳），怎么判断投入品应该加入清单？  排放因子对应问题：由于投入品名称不统一，难以完全对应排放因子所在的数据库中的投入品名称  基于分阶段检索的问题：我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="随记（1）">
+<meta property="og:url" content="http://example.com/2025/10/05/%E9%9A%8F%E8%AE%B0%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="海水养殖碳足迹垂直大模型尚未解决的一些问题 多值问题：当检索到的投入品有多个取值时，如何计算取值（平均，加权平均？）  投入品名称问题：当多个检索文档检索到同一类投入品时，往往因为投入品具体名称不同而分成不同类投入品建立清单（如尼龙6，尼龙，尼龙绳），怎么判断投入品应该加入清单？  排放因子对应问题：由于投入品名称不统一，难以完全对应排放因子所在的数据库中的投入品名称  基于分阶段检索的问题：我们">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-05T05:57:11.000Z">
+<meta property="article:modified_time" content="2025-10-06T08:13:52.106Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+<title >随记（1）</title>
+
+<!-- Favicon -->
+
+    <link href='/img/file.svg?v=2.2.6' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/file.svg?v=2.2.6' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"John Doe","root":"/","typed_text":["Master of AI","AI for science Learner"],"theme_version":"2.2.6","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/file.svg","icon16":"/img/file.svg","icon32":"/img/file.svg","apple_touch_icon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","show_text":null,"hide_text":"王钰龙的个人博客"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","sticky":"TOP","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"","prefix":"The blog has been lovely to run undefined day"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2025-10-06 16:13:52"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.6" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+ 
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/file.svg">
+    
+    
+        <div class="trm-logo-text">
+            Wang<span>Yulong</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    Home
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    Archives
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/photo/" target="">
+                    photos
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    About
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/sea_llm.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            随记（1）
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2025
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/userimg.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        WangYulong
+    </h5>
+    
+        <div class="trm-label">
+            I`m
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/Wang-Yulong-XMU" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="https://www.zhihu.com/people/mockingbird-2-73" title="ZhiHu" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-zhihu"></i>
+        </a>
+    
+        <a href="https://gitee.com/hubu_wyl" title="gitee" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-git"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                XiaMen
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                School:
+            </div>
+            <div class="trm-label trm-label-light">
+                XiaMen University
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                Age:
+            </div>
+            <div class="trm-label trm-label-light">
+                22
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            10/05
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            13:57
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            John Doe
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="海水养殖碳足迹垂直大模型尚未解决的一些问题"><a href="#海水养殖碳足迹垂直大模型尚未解决的一些问题" class="headerlink" title="海水养殖碳足迹垂直大模型尚未解决的一些问题"></a>海水养殖碳足迹垂直大模型尚未解决的一些问题</h2><ol>
+<li><p>多值问题：当检索到的投入品有多个取值时，如何计算取值（平均，加权平均？）</p>
+</li>
+<li><p>投入品名称问题：当多个检索文档检索到同一类投入品时，往往因为投入品具体名称不同而分成不同类投入品建立清单（如尼龙6，尼龙，尼龙绳），怎么判断投入品应该加入清单？</p>
+</li>
+<li><p>排放因子对应问题：由于投入品名称不统一，难以完全对应排放因子所在的数据库中的投入品名称</p>
+</li>
+<li><p>基于分阶段检索的问题：我们是分阶段检索建立表格，这完全依赖于在数值收集和处理中对数据附带标签，对于没有提及具体阶段的数据，如何处理？</p>
+</li>
+</ol>
+<hr>
+<p><strong>以上问题人类是怎么做的？拿到的数据（文献，现场调研报告，公司年报等）应该仍然有以上问题，人类如何解决？</strong></p>
+<h3 id="固定表格以及投入品名称时会造成更多难以接受的问题"><a href="#固定表格以及投入品名称时会造成更多难以接受的问题" class="headerlink" title="固定表格以及投入品名称时会造成更多难以接受的问题"></a>固定表格以及投入品名称时会造成更多难以接受的问题</h3><ol>
+<li><p>检索困难：当投入品名称固定时，因为名称本身与原始数据中名称不一致造成无法检索到对应数据，以至于无法生成</p>
+</li>
+<li><p>难以应对多种多样的养殖品种和养殖模式：不同的品种或者模式投入品都大不相同，难以使用一张固定的表格全部覆盖，失去泛化性</p>
+</li>
+</ol>
+<h2 id="有待量化的一些指标和量化方法"><a href="#有待量化的一些指标和量化方法" class="headerlink" title="有待量化的一些指标和量化方法"></a>有待量化的一些指标和量化方法</h2><p>因为“复利效应”，即多次小概率失误导致大概率错误，所以每个环节都不得不保证卓越的准确性</p>
+<h4 id="量化指标"><a href="#量化指标" class="headerlink" title="量化指标"></a><strong>量化指标</strong></h4><p>表格解耦准确率：因为大量数据来源图表，我们之前选择了LLM解耦表格的做法，但是如何确定LLM能够完整无误的解耦？</p>
+<p>召回率：RAG经典的评测指标，量化是否完整的检索到了所需的数据</p>
+<p>端到端准确率：量化最终生成的清单准确性，我们的应用场景下目前人工对比为最优方法</p>
+<h4 id="量化方法"><a href="#量化方法" class="headerlink" title="量化方法"></a>量化方法</h4><p>表格解耦率：使用目前收集到的表格数据，进行解耦，采用人工校对加LLM校对的方法。对完整解耦后的表格人工对比每项是否准确，也可以对每个解耦的单元，把原始表格和解耦数据送入LLM，AI校对输出T&#x2F;F（AI校对已经成为AI领域流行方法）。</p>
+<p>召回率指标：这些指标依赖于一个有标注的数据集，标注出了【问题，相关文档】数据对，这需要大量人工精力。能否使用经典的RAG数据集代替而不是手动标注海水养殖数据？</p>
+<p>文本相关度：直接将召回的文本对比原问题，计算BLUE等无需数据标注的指标</p>
+<p>端到端准确率：基于课题组“鱼虾贝藻”等已经算过清单的数据，对比模型生成清单（问题在于，这样的数据只有个位数，会不会过少？）</p>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2025/10/06/welcome%20to%20my%20blog/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E9%9A%8F%E7%AC%94/">
+                    随笔
+                </a>
+            </div>
+            <h5>
+                <a href="/2025/10/06/welcome%20to%20my%20blog/" class="trm-anima-link">
+                    欢迎来到我的博客！
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>25/10/06</li>
+                <li>13:00</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-footer-card trm-scroll-animation">
+
+    
+
+    
+
+      
+
+     
+
+    
+        <div class="trm-footer-item">
+            特别致谢：本博客采用开源主题Hexo-Theme-Async驱动，感谢所有开源开发者。
+        </div>
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+            
+<div class="trm-fixed-container">
+    
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.2.6"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.2.6"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>
