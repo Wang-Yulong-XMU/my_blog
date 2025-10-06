@@ -110,7 +110,7 @@ banner:
     fit: cover # 同 CSS object-fit
   index: ## 首页横幅
     type: video # 横幅类型 <[img,slideshow,video]>
-    bgurl: public/img/index.mp4 # 背景图地址
+    bgurl: video/video2.mp4 # 背景图地址
     banner_title: 树深时见鹿，<br>溪午不闻钟。
     banner_text: Hi my new friend!
     video_url:  # 视频地址
