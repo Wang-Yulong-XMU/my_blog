@@ -1,7 +1,9 @@
 ---
 title: 欢迎来到我的博客！
-date: 2025-10-06 13:00
+date: 2025-10-01 13:00
+
 categories: 随笔
+
 katex: false
 cover: /img/780.png
 ---
