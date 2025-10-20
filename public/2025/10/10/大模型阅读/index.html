@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="以大语言模型为核心，从标题和摘要级文本中自动抽取科学知识结构，建立可扩展、可评估、跨领域的科学文献信息抽取范式。  《Structured information extraction from scientific text with large language models》来源： Nature Communications (2024)作者： Krenn 等    🧭 一、研究动机与问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI4S：科学文献知识结构化">
+<meta property="og:url" content="http://example.com/2025/10/10/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%98%85%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="以大语言模型为核心，从标题和摘要级文本中自动抽取科学知识结构，建立可扩展、可评估、跨领域的科学文献信息抽取范式。  《Structured information extraction from scientific text with large language models》来源： Nature Communications (2024)作者： Krenn 等    🧭 一、研究动机与问">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-10T07:30:11.000Z">
+<meta property="article:modified_time" content="2025-10-10T09:00:07.041Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+<title >AI4S：科学文献知识结构化</title>
+
+<!-- Favicon -->
+
+    <link href='/img/file.svg?v=2.2.6' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/file.svg?v=2.2.6' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+<link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css">
+
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"John Doe","root":"/","typed_text":["Master of AI","AI for science Learner"],"theme_version":"2.2.6","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/file.svg","icon16":"/img/file.svg","icon32":"/img/file.svg","apple_touch_icon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","show_text":"(/≧▽≦/)Hey! Good again!","hide_text":"王钰龙的个人博客"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","sticky":"TOP","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"","prefix":"The blog has been lovely to run undefined day"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2025-10-10 17:00:07"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.6" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+ 
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/file.svg">
+    
+    
+        <div class="trm-logo-text">
+            Wang<span>Yulong</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    Home
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    Archives
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/photo/" target="">
+                    photos
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    About
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/ai4s.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            AI4S：科学文献知识结构化
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2025
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/wyl.png">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        WangYulong
+    </h5>
+    
+        <div class="trm-label">
+            I`m
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/Wang-Yulong-XMU" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="https://www.zhihu.com/people/mockingbird-2-73" title="ZhiHu" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-zhihu"></i>
+        </a>
+    
+        <a href="https://gitee.com/hubu_wyl" title="gitee" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-git"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                XiaMen
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                School:
+            </div>
+            <div class="trm-label trm-label-light">
+                XiaMen University
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                Age:
+            </div>
+            <div class="trm-label trm-label-light">
+                22
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            10/10
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            15:30
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            John Doe
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <blockquote>
+<h3 id="以大语言模型为核心，从标题和摘要级文本中自动抽取科学知识结构，"><a href="#以大语言模型为核心，从标题和摘要级文本中自动抽取科学知识结构，" class="headerlink" title="以大语言模型为核心，从标题和摘要级文本中自动抽取科学知识结构，"></a><em>以大语言模型为核心，从标题和摘要级文本中自动抽取科学知识结构，</em></h3><h3 id="建立可扩展、可评估、跨领域的科学文献信息抽取范式。"><a href="#建立可扩展、可评估、跨领域的科学文献信息抽取范式。" class="headerlink" title="建立可扩展、可评估、跨领域的科学文献信息抽取范式。"></a><em>建立可扩展、可评估、跨领域的科学文献信息抽取范式。</em></h3></blockquote>
+<hr>
+<h2 id="《Structured-information-extraction-from-scientific-text-with-large-language-models》"><a href="#《Structured-information-extraction-from-scientific-text-with-large-language-models》" class="headerlink" title="《Structured information extraction from scientific text with large language models》"></a>《Structured information extraction from scientific text with large language models》</h2><p><strong>来源：</strong> <em>Nature Communications (2024)</em><br><strong>作者：</strong> Krenn 等  </p>
+<hr>
+<h2 id="🧭-一、研究动机与问题提出"><a href="#🧭-一、研究动机与问题提出" class="headerlink" title="🧭 一、研究动机与问题提出"></a>🧭 一、研究动机与问题提出</h2><blockquote>
+<p><strong>问题背景：</strong><br>科学论文中包含大量关于材料、化学和实验结果的重要信息，但这些信息往往以<strong>自然语言</strong>形式存在，难以直接用于数据库或知识图谱。</p>
+</blockquote>
+<blockquote>
+<p><strong>研究目标：</strong><br>提出一种简单、通用的 <strong>大型语言模型（LLM）结构化信息抽取方法</strong>，<br>实现从科学文本中联合识别“命名实体（NER）”与“关系（RE）”，并输出结构化结果（如 JSON）。</p>
+</blockquote>
+<p><strong>以往问题：</strong></p>
+<ul>
+<li>依赖规则或特定领域的 NLP 系统，可迁移性差。  </li>
+<li>人工标注成本高，数据集规模受限。</li>
+</ul>
+<hr>
+<h2 id="⚙️-二、方法概述：LLM-NERRE-框架"><a href="#⚙️-二、方法概述：LLM-NERRE-框架" class="headerlink" title="⚙️ 二、方法概述：LLM-NERRE 框架"></a>⚙️ 二、方法概述：LLM-NERRE 框架</h2><h3 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h3><ul>
+<li>使用 <strong>序列到序列（seq2seq）微调策略</strong>，让模型直接生成结构化信息。</li>
+<li>模型输入：科学句子或摘要<br>模型输出：按照预定义 schema 的结构化结果（JSON 或自然语言格式）。</li>
+</ul>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><ul>
+<li><strong>GPT-3（175B）</strong>：API 微调  </li>
+<li><strong>LLaMA-2（70B）</strong>：LoRA 微调（r&#x3D;8, α&#x3D;32, dropout&#x3D;0.05，8-bit量化）  </li>
+<li>训练样本仅需约 100–500 条。</li>
+</ul>
+<hr>
+<h2 id="🧩-三、三个任务与数据来源"><a href="#🧩-三、三个任务与数据来源" class="headerlink" title="🧩 三、三个任务与数据来源"></a>🧩 三、三个任务与数据来源</h2><table>
+<thead>
+<tr>
+<th>任务名称</th>
+<th>领域</th>
+<th>数据来源</th>
+<th>文本层级</th>
+<th>Schema 类型</th>
+<th>数据规模</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Doping</strong>（掺杂）</td>
+<td>固态材料掺杂</td>
+<td>162 篇论文摘要中筛选的掺杂句子</td>
+<td>句子级</td>
+<td>Doping-JSON &#x2F; English &#x2F; Extra-English</td>
+<td>413 训练 &#x2F; 77 测试</td>
+</tr>
+<tr>
+<td><strong>MOF</strong>（金属有机框架）</td>
+<td>MOF 材料</td>
+<td>507 篇 MOF 相关摘要</td>
+<td>摘要级</td>
+<td>MOF-JSON</td>
+<td>507</td>
+</tr>
+<tr>
+<td><strong>General Materials</strong>（通用材料）</td>
+<td>多领域材料科学</td>
+<td>634 篇摘要（半导体、陶瓷、高分子等）</td>
+<td>摘要级</td>
+<td>General-JSON</td>
+<td>~650 条标注样本</td>
+</tr>
+</tbody></table>
+<p><strong>示例 Schema（General-JSON）：</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;barium titanate&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;formula&quot;</span><span class="punctuation">:</span> <span class="string">&quot;BaTiO3&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;acronym&quot;</span><span class="punctuation">:</span> <span class="string">&quot;BTO&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ferroelectric perovskite oxide&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;structure_or_phase&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;perovskite&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;applications&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;dielectric capacitors&quot;</span><span class="punctuation">,</span> <span class="string">&quot;actuators&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="📊-四、评测指标体系"><a href="#📊-四、评测指标体系" class="headerlink" title="📊 四、评测指标体系"></a>📊 四、评测指标体系</h2><h3 id="（1）自动化指标：Exact-Word-Match-F1"><a href="#（1）自动化指标：Exact-Word-Match-F1" class="headerlink" title="（1）自动化指标：Exact Word-Match F1"></a>（1）自动化指标：Exact Word-Match F1</h3><ul>
+<li><p>基于<strong>逐词精确匹配</strong>（严格字符串比较）。</p>
+</li>
+<li><p>要求模型预测的实体或关系与人工标注<strong>完全一致</strong>。</p>
+</li>
+<li><p>对化学式、大小写、标点敏感。</p>
+</li>
+<li><p>若输出 JSON 无法解析 → 记为错误。</p>
+</li>
+</ul>
+<p><strong>计算公式：</strong></p>
+<p>Precision&#x3D;TP+FPTP​,Recall&#x3D;TP+FNTP​,F1&#x3D;P+R2PR​</p>
+<p><strong>评估维度：</strong></p>
+<ul>
+<li><p><strong>NER F1</strong>（命名实体识别）</p>
+</li>
+<li><p><strong>RE F1</strong>（关系抽取）</p>
+</li>
+<li><p><strong>NERRE F1</strong>（联合评估）</p>
+</li>
+</ul>
+<p>⚠️ <strong>局限：</strong> 对语义等价表达不宽容（例如 “BaTiO3” ≠ “barium titanate”）</p>
+<hr>
+<h3 id="（2）人工指标：Manual-Expert-Evaluation"><a href="#（2）人工指标：Manual-Expert-Evaluation" class="headerlink" title="（2）人工指标：Manual &#x2F; Expert Evaluation"></a>（2）人工指标：Manual &#x2F; Expert Evaluation</h3><ul>
+<li><p>抽取测试集约 <strong>10% 样本</strong>，由两名材料领域专家人工判定。</p>
+</li>
+<li><p>判断标准：</p>
+<ul>
+<li><p>语义一致且字段正确 → 记为正确；</p>
+</li>
+<li><p>信息缺失或关系错误 → 记为错误；</p>
+</li>
+<li><p>部分正确 → 仲裁后决定。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>意义：</strong></p>
+<ul>
+<li><p>反映模型在科研实际应用中的<strong>上界性能（upper bound）</strong>。</p>
+</li>
+<li><p>弥补 strict-match F1 的低估。</p>
+</li>
+</ul>
+<p><strong>示例：</strong></p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Field</th>
+<th>Exact F1</th>
+<th>Manual F1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>General-JSON</td>
+<td>formula</td>
+<td>0.429</td>
+<td><strong>0.943</strong></td>
+</tr>
+<tr>
+<td>General-JSON</td>
+<td>applications</td>
+<td>0.512</td>
+<td><strong>0.832</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧠-五、人机协同数据构建（Human-in-the-loop）"><a href="#🧠-五、人机协同数据构建（Human-in-the-loop）" class="headerlink" title="🧠 五、人机协同数据构建（Human-in-the-loop）"></a>🧠 五、人机协同数据构建（Human-in-the-loop）</h2><blockquote>
+<p><strong>核心思想：</strong><br>让模型参与标注过程：由模型进行初步标注，人工再进行修正与扩充，从而显著降低标注成本。</p>
+</blockquote>
+<h3 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h3><ol>
+<li><p><strong>人工初始标注</strong>：人工构建 50–100 条高质量样本。</p>
+</li>
+<li><p><strong>初步微调模型</strong>：用少量样本微调 LLM，得到中间模型。</p>
+</li>
+<li><p><strong>模型预标注</strong>：中间模型对新文本生成结构化输出（JSON）。</p>
+</li>
+<li><p><strong>人工修正</strong>：人工审阅、修改错误字段（如 dopant&#x2F;host 对调）。</p>
+</li>
+<li><p><strong>数据扩充 + 再训练</strong>：将修正数据加入训练集，形成迭代循环。</p>
+</li>
+</ol>
+<p><strong>效率提升结果：</strong></p>
+<table>
+<thead>
+<tr>
+<th>训练样本数量（中间模型）</th>
+<th>人工时间占比</th>
+<th>效率提升</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1（无模型）</td>
+<td>100%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>50</td>
+<td>68%</td>
+<td>↑32%</td>
+</tr>
+<tr>
+<td>100</td>
+<td>57%</td>
+<td>↑43%</td>
+</tr>
+<tr>
+<td>300</td>
+<td><strong>43%</strong></td>
+<td><strong>↑57%</strong></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>📈 <strong>结论：</strong><br>即使只使用约 300 条样本训练的中间模型，也能使人工标注时间减少约 57%。<br>模型的“半正确输出”让人工更高效地理解 schema、快速修正。</p>
+</blockquote>
+<hr>
+<h2 id="🔬-六、主要结果与分析"><a href="#🔬-六、主要结果与分析" class="headerlink" title="🔬 六、主要结果与分析"></a>🔬 六、主要结果与分析</h2><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>模型</th>
+<th>Schema</th>
+<th>Exact F1</th>
+<th>Manual F1</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Doping</td>
+<td>LLaMA-2</td>
+<td>JSON</td>
+<td><strong>0.821</strong></td>
+<td>≈0.87</td>
+<td>结构最清晰</td>
+</tr>
+<tr>
+<td>Doping</td>
+<td>GPT-3</td>
+<td>Extra-English</td>
+<td><strong>0.809</strong></td>
+<td>类似</td>
+<td>英文格式更适合 GPT</td>
+</tr>
+<tr>
+<td>MOF</td>
+<td>GPT-3</td>
+<td>JSON</td>
+<td>0.4–0.6</td>
+<td>↑显著提升</td>
+<td>实体复杂度高</td>
+</tr>
+<tr>
+<td>General</td>
+<td>GPT-3</td>
+<td>JSON</td>
+<td>0.3–0.5</td>
+<td><strong>0.83–0.94</strong></td>
+<td>语义等价但词形不同</td>
+</tr>
+</tbody></table>
+<p><strong>总结发现：</strong></p>
+<ul>
+<li><p>GPT-3 更擅长自然语言输出；</p>
+</li>
+<li><p>LLaMA-2 更擅长 JSON 格式；</p>
+</li>
+<li><p>Manual 评分显示模型语义理解远超严格匹配结果。</p>
+</li>
+</ul>
+<hr>
+<h2 id="⚠️-七、讨论与局限"><a href="#⚠️-七、讨论与局限" class="headerlink" title="⚠️ 七、讨论与局限"></a>⚠️ 七、讨论与局限</h2><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>描述</th>
+<th>解决思路</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Exact 匹配过严</strong></td>
+<td>忽略语义等价表达</td>
+<td>引入语义相似度指标（如 BERTScore）</td>
+</tr>
+<tr>
+<td><strong>JSON 可解析性</strong></td>
+<td>少数样本生成无效 JSON</td>
+<td>增加格式约束与验证步骤</td>
+</tr>
+<tr>
+<td><strong>幻觉（hallucination）</strong></td>
+<td>模型可能生成文中不存在的事实</td>
+<td>限制生成实体必须出现在源文中</td>
+</tr>
+<tr>
+<td><strong>人工成本仍存在</strong></td>
+<td>虽显著降低但未完全消除</td>
+<td>继续优化人机循环策略</td>
+</tr>
+<tr>
+<td><strong>领域泛化</strong></td>
+<td>目前聚焦材料科学</td>
+<td>可扩展至生物、药物等领域</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚙️-八、实现要点"><a href="#⚙️-八、实现要点" class="headerlink" title="⚙️ 八、实现要点"></a>⚙️ 八、实现要点</h2><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>训练方式</th>
+<th>样本量</th>
+<th>硬件</th>
+<th>超参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GPT-3</td>
+<td>API 微调（7 epoch）</td>
+<td>100–500</td>
+<td>云端</td>
+<td>temperature&#x3D;0, max_tokens&#x3D;512–1024</td>
+</tr>
+<tr>
+<td>LLaMA-2</td>
+<td>LoRA 微调</td>
+<td>同上</td>
+<td>A100 80GB</td>
+<td>r&#x3D;8, α&#x3D;32, dropout&#x3D;0.05, 8-bit量化</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💡-九、启示与总结"><a href="#💡-九、启示与总结" class="headerlink" title="💡 九、启示与总结"></a>💡 九、启示与总结</h2><ol>
+<li><p><strong>方法简洁</strong>：基于 LLM 的端到端结构化生成，无需复杂架构。</p>
+</li>
+<li><p><strong>数据效率高</strong>：百级样本即可获得可用性能。</p>
+</li>
+<li><p><strong>人机协同高效</strong>：预标注+人工修正显著降低成本。</p>
+</li>
+<li><p><strong>评测更全面</strong>：结合 strict-match 与 semantic-match 评估体系。</p>
+</li>
+<li><p><strong>可迁移性强</strong>：通用 schema 可推广至其他科学文本抽取场景。</p>
+</li>
+</ol>
+<hr>
+<h2 id="✅-十、总结"><a href="#✅-十、总结" class="headerlink" title="✅ 十、总结"></a>✅ 十、总结</h2><ul>
+<li><p>LLM 可实现科学文本信息结构化抽取的通用框架。</p>
+</li>
+<li><p>Exact-match 与 Manual 评估结合提供上下界性能。</p>
+</li>
+<li><p>人机协同标注策略是关键创新点。</p>
+</li>
+<li><p>不同 schema（JSON vs English）影响模型表现。</p>
+</li>
+<li><p>未来可扩展到跨领域科学知识抽取。</p>
+</li>
+</ul>
+<hr>
+<h2 id="《Data-extraction-from-polymer-literature-using-large-language-models》"><a href="#《Data-extraction-from-polymer-literature-using-large-language-models》" class="headerlink" title="《Data extraction from polymer literature using large language models》"></a>《Data extraction from polymer literature using large language models》</h2><p><strong>来源：</strong> <em>Communications Materials (Nature Portfolio, 2024)</em><br><strong>作者：</strong> Krenn et al.</p>
+<hr>
+<h2 id="🧭-一、研究动机与总体目标"><a href="#🧭-一、研究动机与总体目标" class="headerlink" title="🧭 一、研究动机与总体目标"></a>🧭 一、研究动机与总体目标</h2><blockquote>
+<p><strong>研究背景：</strong><br>材料科学文献中包含大量关于聚合物及其物性的宝贵信息，但这些信息以非结构化自然语言存在，难以直接转化为可计算数据库。  </p>
+</blockquote>
+<blockquote>
+<p><strong>核心目标：</strong><br>开发一个可扩展的<strong>大型语言模型（LLM）驱动的自动信息抽取管线</strong>，从超过 <strong>240 万篇材料科学论文</strong>中提取<strong>聚合物—属性—数值—单位</strong>四元组，构建结构化数据集。  </p>
+</blockquote>
+<p><strong>主要挑战：</strong></p>
+<ul>
+<li>文献表达形式多样（公式、缩写、非标准单位）；</li>
+<li>缺乏大规模人工标注数据；</li>
+<li>需要平衡准确度、泛化性与计算成本。</li>
+</ul>
+<hr>
+<h2 id="🧩-二、任务体系概览"><a href="#🧩-二、任务体系概览" class="headerlink" title="🧩 二、任务体系概览"></a>🧩 二、任务体系概览</h2><p>论文提出了一个由 <strong>三大任务（tasks）</strong> 构成的多层抽取框架：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>任务名称</th>
+<th>核心目标</th>
+<th>输入来源</th>
+<th>输出结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Task 1</strong></td>
+<td>Heuristic Filtering（启发式筛选）</td>
+<td>从数百万篇文献中筛选出可能包含聚合物属性信息的段落</td>
+<td>2.4M 材料科学论文（HTML&#x2F;XML 全文）</td>
+<td>2.6M 属性相关段落</td>
+</tr>
+<tr>
+<td><strong>Task 2</strong></td>
+<td>NER Filtering（命名实体识别过滤）</td>
+<td>找出同时包含材料名、属性、数值、单位的段落</td>
+<td>Task 1 输出（2.6M 段落）</td>
+<td>716k 高置信段落</td>
+</tr>
+<tr>
+<td><strong>Task 3</strong></td>
+<td>Information Extraction（信息抽取）</td>
+<td>从段落中抽取结构化四元组：Material–Property–Value–Unit</td>
+<td>716k 段落</td>
+<td>1M+ 条结构化记录</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚙️-三、任务详解"><a href="#⚙️-三、任务详解" class="headerlink" title="⚙️ 三、任务详解"></a>⚙️ 三、任务详解</h2><h3 id="1️⃣-Task-1：启发式筛选（Heuristic-Filtering）"><a href="#1️⃣-Task-1：启发式筛选（Heuristic-Filtering）" class="headerlink" title="1️⃣ Task 1：启发式筛选（Heuristic Filtering）"></a>1️⃣ Task 1：启发式筛选（Heuristic Filtering）</h3><p><strong>目标：</strong> 从全语料中筛出潜在的聚合物属性描述。<br><strong>方法：</strong></p>
+<ul>
+<li>构建 24 种属性关键词表（如 <em>glass transition temperature</em>, <em>tensile strength</em>, <em>modulus</em>, <em>conductivity</em> 等）。  </li>
+<li>匹配关键词及其变体，保留相关段落。</li>
+</ul>
+<p><strong>结果：</strong></p>
+<ul>
+<li>初始段落：23.3M  </li>
+<li>筛选后保留：2.6M 段落  </li>
+<li>来源论文：约 681,000 篇含“poly”前缀的聚合物论文。</li>
+</ul>
+<hr>
+<h3 id="2️⃣-Task-2：NER-Filtering（命名实体识别过滤）"><a href="#2️⃣-Task-2：NER-Filtering（命名实体识别过滤）" class="headerlink" title="2️⃣ Task 2：NER Filtering（命名实体识别过滤）"></a>2️⃣ Task 2：NER Filtering（命名实体识别过滤）</h3><p><strong>目标：</strong> 进一步筛选具有完整信息的段落。<br><strong>方法：</strong></p>
+<ul>
+<li>使用 <strong>MaterialsBERT</strong> 模型识别四类实体：<ul>
+<li>Material（材料）</li>
+<li>Property（属性）</li>
+<li>Value（数值）</li>
+<li>Unit（单位）</li>
+</ul>
+</li>
+<li>若段落缺任一实体类型则剔除。</li>
+</ul>
+<p><strong>结果：</strong></p>
+<ul>
+<li>从 2.6M → 716k 段落  </li>
+<li>大幅降低 LLM 推理成本。</li>
+</ul>
+<hr>
+<h3 id="3️⃣-Task-3：Information-Extraction（信息抽取）"><a href="#3️⃣-Task-3：Information-Extraction（信息抽取）" class="headerlink" title="3️⃣ Task 3：Information Extraction（信息抽取）"></a>3️⃣ Task 3：Information Extraction（信息抽取）</h3><p><strong>目标：</strong> 从高置信段落中抽取结构化记录。</p>
+<table>
+<thead>
+<tr>
+<th>路线</th>
+<th>模型</th>
+<th>特点</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>NER Pipeline</strong></td>
+<td>MaterialsBERT + 启发式规则</td>
+<td>轻量级、可解释性强</td>
+<td>表格化数据</td>
+</tr>
+<tr>
+<td><strong>LLM Pipeline</strong></td>
+<td>GPT-3.5 &#x2F; LLaMA-2 + 指令提示</td>
+<td>高灵活性，可处理复杂句式</td>
+<td>JSON 格式结构化输出</td>
+</tr>
+</tbody></table>
+<p><strong>数据示例：</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;material&quot;</span><span class="punctuation">:</span> <span class="string">&quot;PMMA&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;property&quot;</span><span class="punctuation">:</span> <span class="string">&quot;glass transition temperature&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;105&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;unit&quot;</span><span class="punctuation">:</span> <span class="string">&quot;°C&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="🧠-四、数据来源与标注集"><a href="#🧠-四、数据来源与标注集" class="headerlink" title="🧠 四、数据来源与标注集"></a>🧠 四、数据来源与标注集</h2><table>
+<thead>
+<tr>
+<th>数据层级</th>
+<th>内容</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原始语料</td>
+<td>Elsevier、ACS、RSC、Springer 开放文献</td>
+<td>2.4M 篇文章 &#x2F; 23.3M 段落</td>
+</tr>
+<tr>
+<td>启发式筛选后</td>
+<td>含属性关键词的段落</td>
+<td>2.6M 段落</td>
+</tr>
+<tr>
+<td>NER 过滤后</td>
+<td>含 material-property-value-unit 的段落</td>
+<td>716k 段落</td>
+</tr>
+<tr>
+<td>手工标注集</td>
+<td>630 篇摘要，951 条样本（595 Tg + 356 bandgap）</td>
+<td>用于评测与 few-shot 示例</td>
+</tr>
+<tr>
+<td>评测语料</td>
+<td>1000 篇文献（包含上述 630 篇）</td>
+<td>用于准确性与泛化测试</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧩-五、评测集与评测逻辑"><a href="#🧩-五、评测集与评测逻辑" class="headerlink" title="🧩 五、评测集与评测逻辑"></a>🧩 五、评测集与评测逻辑</h2><h3 id="（1）两类文献集合"><a href="#（1）两类文献集合" class="headerlink" title="（1）两类文献集合"></a>（1）两类文献集合</h3><table>
+<thead>
+<tr>
+<th>集合</th>
+<th>数量</th>
+<th>是否人工标注</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>630 篇人工标注集</strong></td>
+<td>951 条样本</td>
+<td>✅ 是</td>
+<td>精确评测与 few-shot 示例</td>
+</tr>
+<tr>
+<td><strong>1000 篇评估集</strong></td>
+<td>含上面 630 篇</td>
+<td>✅ 部分</td>
+<td>泛化与规模化评估</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>📘 设计逻辑：</p>
+<ul>
+<li><p>630 篇 → 有真值，用于计算 F1；</p>
+</li>
+<li><p>1000 篇 → 包含未标注样本，用于测试泛化与覆盖率。</p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="（2）评测方式"><a href="#（2）评测方式" class="headerlink" title="（2）评测方式"></a>（2）评测方式</h3><p><strong>评测目标：</strong><br>验证模型是否能正确抽取四元组 <code>Material–Property–Value–Unit</code>。</p>
+<p><strong>判定规则：</strong></p>
+<ul>
+<li><p>只有当预测结果与人工标注出现在<strong>同一段落</strong>时，且四个字段<strong>完全一致</strong>，才记为正确（True Positive）。</p>
+</li>
+<li><p>其他情况计为错误（FP &#x2F; FN）。</p>
+</li>
+</ul>
+<p><strong>指标计算：</strong></p>
+<p>Precision&#x3D;TP+FPTP​,Recall&#x3D;TP+FNTP​,F1&#x3D;P+R2PR​</p>
+<hr>
+<h2 id="🧮-六、评测层级设计：段落匹配-×-篇级汇总"><a href="#🧮-六、评测层级设计：段落匹配-×-篇级汇总" class="headerlink" title="🧮 六、评测层级设计：段落匹配 × 篇级汇总"></a>🧮 六、评测层级设计：段落匹配 × 篇级汇总</h2><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>段落级（Paragraph-level）</strong></td>
+<td>模型输入与匹配单位。每个段落独立送入 LLM，输出 JSON；若结果与人工标注在同一段落出现则记为正确。</td>
+</tr>
+<tr>
+<td><strong>篇级（Article-level）</strong></td>
+<td>聚合单位。将每篇文章中 TP、FP、FN 累积后计算宏平均 F1，用于整体性能报告。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ 匹配单位 &#x3D; 段落<br>✅ 汇总单位 &#x3D; 篇</p>
+<p><strong>段落粒度</strong> 保证语义准确（避免跨段幻觉），<br><strong>篇级汇总</strong> 反映总体性能（方便分析泛化与覆盖）。</p>
+</blockquote>
+<hr>
+<h2 id="📊-七、评测结果（概要）"><a href="#📊-七、评测结果（概要）" class="headerlink" title="📊 七、评测结果（概要）"></a>📊 七、评测结果（概要）</h2><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>属性</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>GPT-3.5 (similar-shot)</strong></td>
+<td>Tg</td>
+<td>0.90</td>
+<td>0.83</td>
+<td><strong>0.86</strong></td>
+<td>表达最灵活、幻觉率最低</td>
+</tr>
+<tr>
+<td><strong>LLaMA-2 (LoRA fine-tuned)</strong></td>
+<td>Tg</td>
+<td>0.78</td>
+<td>0.72</td>
+<td>0.75</td>
+<td>需更大样本支持</td>
+</tr>
+<tr>
+<td><strong>MaterialsBERT (NER)</strong></td>
+<td>Tg</td>
+<td>0.71</td>
+<td>0.69</td>
+<td>0.70</td>
+<td>高速但上下文捕获能力弱</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Bandgap</td>
+<td>相对较低 (~0.65–0.8)</td>
+<td>—</td>
+<td>GPT 仍领先</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>GPT-3.5 few-shot（尤其是 similar-shot 策略）在两种属性上均取得最佳 F1。</p>
+</blockquote>
+<hr>
+<h2 id="📘-八、总结"><a href="#📘-八、总结" class="headerlink" title="📘 八、总结"></a>📘 八、总结</h2><ul>
+<li><p>本文通过三阶段（启发式过滤 → NER → LLM 抽取），  实现从 240 万篇材料文献中自动抽取结构化聚合物数据。</p>
+</li>
+<li><p>模型评测采用“段落级判定 + 篇级汇总”的双层体系，  结合 630 篇人工标注与 1000 篇整体语料，实现了准确性与泛化能力的平衡。</p>
+</li>
+<li><p>GPT-3.5 在 few-shot 提示下表现最佳，  展示了 LLM 在科学信息结构化中的巨大潜力。</p>
+</li>
+</ul>
+<hr>
+<h2 id="《Large-language-models-reveal-big-disparities-in-current-wildfire-research》"><a href="#《Large-language-models-reveal-big-disparities-in-current-wildfire-research》" class="headerlink" title="《Large language models reveal big disparities in current wildfire research》"></a>《Large language models reveal big disparities in current wildfire research》</h2><p><strong>来源：</strong> <em>Communications Earth &amp; Environment (Nature Portfolio, 2024)</em><br><strong>作者：</strong> Zhengyang Lin, Anping Chen, Xuhui Wang, Zhihua Liu, Shilong Piao  </p>
+<hr>
+<h2 id="🧭-一、研究目的与总体设计"><a href="#🧭-一、研究目的与总体设计" class="headerlink" title="🧭 一、研究目的与总体设计"></a>🧭 一、研究目的与总体设计</h2><blockquote>
+<p><strong>研究目标：</strong><br>使用大型语言模型（LLM，GPT-3.5-turbo）对 1980–2022 年间的**全球野火研究文献（60,488 篇）**进行自动化分类与地理信息提取，以发现学科与区域间的研究不均衡现象。  </p>
+</blockquote>
+<blockquote>
+<p><strong>研究逻辑：</strong>  </p>
+<ol>
+<li>从 Web of Science 检索全部“野火（wildfire）”相关论文；  </li>
+<li>利用 LLM 自动识别研究主题与地理位置；  </li>
+<li>与卫星观测的火灾面积、排放、社会经济数据进行对比分析。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="🧩-二、数据来源（Data-Sources）"><a href="#🧩-二、数据来源（Data-Sources）" class="headerlink" title="🧩 二、数据来源（Data Sources）"></a>🧩 二、数据来源（Data Sources）</h2><h3 id="1️⃣-文献数据"><a href="#1️⃣-文献数据" class="headerlink" title="1️⃣ 文献数据"></a>1️⃣ 文献数据</h3><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>来源数据库</strong></td>
+<td>Web of Science (WOS)</td>
+</tr>
+<tr>
+<td><strong>时间范围</strong></td>
+<td>1900 – 2023年2月13日</td>
+</tr>
+<tr>
+<td><strong>关键词</strong></td>
+<td>“wildfire”, “bushfire”, “forest fire”, “grassland fire”等（详见 Supplementary Table 1）</td>
+</tr>
+<tr>
+<td><strong>初始检索结果</strong></td>
+<td>103,720 篇（去重后）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>使用每篇文献的「标题（Title）」与「摘要（Abstract）」，而不是全文（Full text）</p>
+</blockquote>
+<h3 id="2️⃣-多源地理与环境数据（用于对比分析）"><a href="#2️⃣-多源地理与环境数据（用于对比分析）" class="headerlink" title="2️⃣ 多源地理与环境数据（用于对比分析）"></a>2️⃣ 多源地理与环境数据（用于对比分析）</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>来源</th>
+<th>时间范围</th>
+<th>空间分辨率</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>烧毁面积（Burned Area）</strong></td>
+<td>AVHRR-LTDR（ESA Fire_CCI）</td>
+<td>1982–2018</td>
+<td>0.05°</td>
+<td>与文献地理分布对比</td>
+</tr>
+<tr>
+<td><strong>火灾排放（Emissions）</strong></td>
+<td>GFED4.1s</td>
+<td>1997–2021</td>
+<td>0.25°</td>
+<td>评估火灾强度与分布</td>
+</tr>
+<tr>
+<td><strong>人口数据（Population）</strong></td>
+<td>GPWv4 (NASA SEDAC)</td>
+<td>2000–2020</td>
+<td>5年间隔</td>
+<td>评估受影响人群</td>
+</tr>
+<tr>
+<td><strong>经济数据（GDP）</strong></td>
+<td>Gridded Global GDP Dataset (Kummu et al., 2018)</td>
+<td>1990–2015</td>
+<td>国家级</td>
+<td>衡量经济发展差异</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚙️-三、分析与抽取方法（Analysis-and-Extraction-Methods）"><a href="#⚙️-三、分析与抽取方法（Analysis-and-Extraction-Methods）" class="headerlink" title="⚙️ 三、分析与抽取方法（Analysis and Extraction Methods）"></a>⚙️ 三、分析与抽取方法（Analysis and Extraction Methods）</h2><h3 id="（1）LLM-信息抽取框架"><a href="#（1）LLM-信息抽取框架" class="headerlink" title="（1）LLM 信息抽取框架"></a>（1）LLM 信息抽取框架</h3><p>使用 <strong>OpenAI GPT-3.5-turbo</strong> 模型（无微调）通过 API 调用执行以下任务：</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>任务说明</th>
+<th>输出信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>文本判定</strong></td>
+<td>判断文献是否与野火研究相关（1&#x2F;0）</td>
+<td>relevance flag</td>
+</tr>
+<tr>
+<td><strong>主题分类</strong></td>
+<td>从预设主题池中识别主要研究方向（vegetation, atmospheric, anthropogenic, modeling, remote sensing 等）</td>
+<td>主&#x2F;次主题标签</td>
+</tr>
+<tr>
+<td><strong>研究元信息提取</strong></td>
+<td>识别文献类型、研究阶段（pre-fire, burning, post-fire）、研究时间段</td>
+<td>分类元数据</td>
+</tr>
+<tr>
+<td><strong>地理位置解析（Geoparsing）</strong></td>
+<td>从标题与摘要中抽取地理实体，转换为数值坐标（最大外包围 MOB、中心点 CP），并生成 ISO-3166 国家代码</td>
+<td>经纬度 + 区域代码</td>
+</tr>
+<tr>
+<td><strong>火源分类（Ignition Classification）</strong></td>
+<td>自动判定火源类别（human-caused &#x2F; natural &#x2F; mixed）</td>
+<td>ignition type</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚙️ <strong>技术实现要点：</strong></p>
+<ul>
+<li>采用 prompt-based pipeline（非特征工程）；</li>
+<li>对每篇文献生成独立的 JSON 结构；</li>
+<li>坐标统一到 1° 栅格分辨率；</li>
+<li>输出可直接映射到地理空间数据。</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="（2）Prompt-设计示例（关键提取结构）"><a href="#（2）Prompt-设计示例（关键提取结构）" class="headerlink" title="（2）Prompt 设计示例（关键提取结构）"></a>（2）Prompt 设计示例（关键提取结构）</h3><h4 id="🔹-文献主题与元信息提取"><a href="#🔹-文献主题与元信息提取" class="headerlink" title="🔹 文献主题与元信息提取"></a>🔹 文献主题与元信息提取</h4><p>“You are a perfect classifier.List all the following contents and start with a<br> newline.I would like you to (not specific or not applicable marked as N&#x2F;Az): ….”</p>
+<h4 id="🔹-地理位置解析（Geoparser）"><a href="#🔹-地理位置解析（Geoparser）" class="headerlink" title="🔹 地理位置解析（Geoparser）"></a>🔹 地理位置解析（Geoparser）</h4><p>“You are an accurate geoparser with outputs in 1° spatial resolution (per<br> grid). Parse the following text into separate regions. Start with a new<br> paragraph for every single region. Define the maximum outer boundary as<br> MOB ([left-top location, right-bottom location]) and the central point as<br> CP. All the MOB and CP are recorded in the pairs of (latitude, longitude)<br> and integers.<br> (1) if it is a qualified geographical location:<br> (a) no smaller than the area of 1 grid, list the parsed name and MOB;<br> (b) smaller than the area of 1 grid, list the parsed name and CP;<br> (2) if not, only return ‘None+‘; no extra notes&#x2F;raw texts nor expla<br>nations should be returned.”</p>
+<h4 id="🔹-火源分类"><a href="#🔹-火源分类" class="headerlink" title="🔹 火源分类"></a>🔹 火源分类</h4><p>““Does the given text contain any descriptions of ignition sources?<br> if does, select from the below type: natural-caused&#x2F;human-caused&#x2F;<br> mixed; default as mixed; if not, return N&#x2F;A; do not return any extra&#x2F;fur<br>ther words.””</p>
+<blockquote>
+<p>🧠 这些 prompt 均采用零样本（zero-shot）或轻微 few-shot 格式，经人工验证与多轮改进以提高稳定性。</p>
+</blockquote>
+<hr>
+<h3 id="（3）模型性能验证（Validation）"><a href="#（3）模型性能验证（Validation）" class="headerlink" title="（3）模型性能验证（Validation）"></a>（3）模型性能验证（Validation）</h3><table>
+<thead>
+<tr>
+<th>验证方式</th>
+<th>样本规模</th>
+<th>方法</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>人工对照验证</td>
+<td>1,569 篇样本文献</td>
+<td>二分类（是否为野火相关）</td>
+<td>平均 F1 &#x3D; 0.85（bootstrapping ×1000）</td>
+</tr>
+<tr>
+<td>对照模型</td>
+<td>BERT 基线</td>
+<td>GPT-3.5 性能相当或略优（特别是在推理和问答任务中）</td>
+<td></td>
+</tr>
+<tr>
+<td>交叉验证</td>
+<td>随机重采样多轮次</td>
+<td>结果稳定，方差较小</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧮-四、分析结构与评测框架（Evaluation-Structure）"><a href="#🧮-四、分析结构与评测框架（Evaluation-Structure）" class="headerlink" title="🧮 四、分析结构与评测框架（Evaluation Structure）"></a>🧮 四、分析结构与评测框架（Evaluation Structure）</h2><table>
+<thead>
+<tr>
+<th>分析层次</th>
+<th>任务目标</th>
+<th>使用数据</th>
+<th>模型输出</th>
+<th>对比或评估方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1. 文献识别与分类</strong></td>
+<td>从 100k+ 文献中筛出相关研究并按主题分类</td>
+<td>Web of Science 文献</td>
+<td>主题标签 + 阶段信息</td>
+<td>人工样本交叉验证</td>
+</tr>
+<tr>
+<td><strong>2. 地理信息抽取</strong></td>
+<td>将文本中的地点转化为坐标</td>
+<td>文献标题 + 摘要</td>
+<td>经纬度、国家代码</td>
+<td>与卫星火灾数据比对</td>
+</tr>
+<tr>
+<td><strong>3. 空间一致性评估</strong></td>
+<td>比较研究分布与真实火灾分布</td>
+<td>AVHRR-LTDR、GFED</td>
+<td>空间热图</td>
+<td>计算出版量与烧毁面积比值</td>
+</tr>
+<tr>
+<td><strong>4. 社会经济交叉分析</strong></td>
+<td>研究密度 vs 人口与 GDP 分布</td>
+<td>GPWv4、GDP 栅格</td>
+<td>区域聚合值</td>
+<td>计算区域不平衡指数</td>
+</tr>
+<tr>
+<td><strong>5. 模型精度评估</strong></td>
+<td>LLM 输出与人工判断对比</td>
+<td>1,569 样本文献</td>
+<td>二元分类结果</td>
+<td>Precision, Recall, F1</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧠-五、方法特点与数据流总结"><a href="#🧠-五、方法特点与数据流总结" class="headerlink" title="🧠 五、方法特点与数据流总结"></a>🧠 五、方法特点与数据流总结</h2><p>文献检索 (WOS)<br>↓<br>GPT-3.5 主题分类 + 地理解析<br>↓<br>生成 60,488 条结构化记录<br>↓<br>空间匹配：卫星火灾数据 (AVHRR, GFED)<br>↓<br>叠加社会经济数据 (人口 + GDP)<br>↓<br>计算地区研究-火灾不平衡指数<br>↓<br>输出可视化地图与时间序列分析</p>
+<p><strong>关键技术点：</strong></p>
+<ul>
+<li>使用 LLM 替代传统 NLP 流程（如 BERT 特征提取 + 规则匹配）；</li>
+<li>零样本 prompt 驱动，无需微调；</li>
+<li>地理信息自动结构化（geoparsing）；</li>
+<li>交叉验证确保可靠性；</li>
+<li>开放数据链路实现可复现性（代码与结果均公开）。</li>
+</ul>
+<hr>
+<h2 id="📊-六、评测（Performance-Reliability）"><a href="#📊-六、评测（Performance-Reliability）" class="headerlink" title="📊 六、评测（Performance &amp; Reliability）"></a>📊 六、评测（Performance &amp; Reliability）</h2><table>
+<thead>
+<tr>
+<th>评测对象</th>
+<th>指标</th>
+<th>数据来源</th>
+<th>验证方式</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>文献判定</strong></td>
+<td>Precision, Recall, F1</td>
+<td>1,569 篇人工样本</td>
+<td>Bootstrapping ×1000</td>
+<td>F1 ≈ 0.85</td>
+</tr>
+<tr>
+<td><strong>地理解析</strong></td>
+<td>匹配率（Geolocation Accuracy）</td>
+<td>手动地名样本</td>
+<td>人工复核</td>
+<td>≥80% 正确率</td>
+</tr>
+<tr>
+<td><strong>主题分类一致性</strong></td>
+<td>Cohen’s κ</td>
+<td>多轮 Prompt 测试</td>
+<td>GPT 输出一致性</td>
+<td>κ &#x3D; 0.82</td>
+</tr>
+<tr>
+<td><strong>整体数据覆盖</strong></td>
+<td>文献数 + 匹配成功率</td>
+<td>103,720 → 60,488</td>
+<td>自动筛选统计</td>
+<td>58.3% 相关率</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="✅-八、总结"><a href="#✅-八、总结" class="headerlink" title="✅ 八、总结"></a>✅ 八、总结</h2><blockquote>
+<p>本研究使用 GPT-3.5-turbo 构建了一个基于 LLM 的<strong>文献自动分类与地理解析系统</strong>，<br>从 10 万余篇文献中识别出 6 万多篇野火研究，<br>并通过与卫星火灾与社会经济数据的空间叠加，实现了大规模学术研究分布分析。  </p>
+</blockquote>
+<p><strong>其关键贡献在于：</strong></p>
+<ul>
+<li>实现零样本 LLM 信息抽取与地理结构化；</li>
+<li>建立可复现、开放式数据管线；</li>
+<li>提出基于 LLM 的“AI 文献计量分析框架”，<br>可迁移至气候、生态、地理等多学科场景。</li>
+</ul>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2025/10/07/3%EF%BC%89%E5%88%86%E5%B1%82%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9AMCMC/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/bys.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E7%AE%97%E6%B3%95/">
+                    算法
+                </a>
+            </div>
+            <h5>
+                <a href="/2025/10/07/3%EF%BC%89%E5%88%86%E5%B1%82%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9AMCMC/" class="trm-anima-link">
+                    分层贝叶斯（3）：MCMC——理论与现实的桥梁
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>25/10/07</li>
+                <li>16:13</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-footer-card trm-scroll-animation">
+
+    
+
+    
+
+      
+
+     
+
+    
+        <div class="trm-footer-item">
+            特别致谢：本博客采用开源主题Hexo-Theme-Async驱动，感谢所有开源开发者。
+        </div>
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+            
+<div class="trm-fixed-container">
+    
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.2.6"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+        
+<script src="https://unpkg.com/katex@latest/dist/katex.min.js" data-swup-reload-script></script>
+
+        
+            
+<script src="https://unpkg.com/katex@latest/dist/contrib/copy-tex.min.js" data-swup-reload-script></script>
+
+        
+        
+<script src="https://unpkg.com/katex@latest/dist/contrib/auto-render.min.js" data-swup-reload-script></script>
+
+        <script data-swup-reload-script>
+              window.renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                ...{},
+            })
+        </script>
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.2.6"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>

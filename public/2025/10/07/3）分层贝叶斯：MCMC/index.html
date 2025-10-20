@@ -7,20 +7,20 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="🥳 博客开张大吉！Hello world！经过一段时间的折腾和搭建，我的个人博客终于正式上线啦！ 能够在这个小小的数字空间里，拥有一个完全属于自己的角落，是一件令人兴奋的事情。 💡 为什么搭建这个博客？我的初衷非常简单：记录、分享。  记录我的成长轨迹： 我会在这里记录我在 学习和工作中的心得体会、踩过的坑以及解决方案。 分享经验与知识： 希望我的经验能够帮助到有同样困惑的朋友。这里将是我的知">
+<meta name="description" content="⚙️ 分层贝叶斯：MCMC——复杂后验的采样引言：当贝叶斯遇到“维度灾难”在前两篇文章中，我们了解了贝叶斯推断的基础（先验、似然、后验）以及分层贝叶斯模型（HBM）如何通过超参数 $\alpha$ 实现信息共享。 分层模型虽然强大，但也带来了巨大的计算挑战。回想贝叶斯定理： $$P(\theta|D) \propto P(D|\theta) P(\theta)$$ 当我们有 $M$ 个局部参数 $">
 <meta property="og:type" content="article">
-<meta property="og:title" content="欢迎来到我的博客！">
-<meta property="og:url" content="http://example.com/2025/10/01/welcome%20to%20my%20blog/index.html">
+<meta property="og:title" content="分层贝叶斯（3）：MCMC——理论与现实的桥梁">
+<meta property="og:url" content="http://example.com/2025/10/07/3%EF%BC%89%E5%88%86%E5%B1%82%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9AMCMC/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="🥳 博客开张大吉！Hello world！经过一段时间的折腾和搭建，我的个人博客终于正式上线啦！ 能够在这个小小的数字空间里，拥有一个完全属于自己的角落，是一件令人兴奋的事情。 💡 为什么搭建这个博客？我的初衷非常简单：记录、分享。  记录我的成长轨迹： 我会在这里记录我在 学习和工作中的心得体会、踩过的坑以及解决方案。 分享经验与知识： 希望我的经验能够帮助到有同样困惑的朋友。这里将是我的知">
+<meta property="og:description" content="⚙️ 分层贝叶斯：MCMC——复杂后验的采样引言：当贝叶斯遇到“维度灾难”在前两篇文章中，我们了解了贝叶斯推断的基础（先验、似然、后验）以及分层贝叶斯模型（HBM）如何通过超参数 $\alpha$ 实现信息共享。 分层模型虽然强大，但也带来了巨大的计算挑战。回想贝叶斯定理： $$P(\theta|D) \propto P(D|\theta) P(\theta)$$ 当我们有 $M$ 个局部参数 $">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-10-01T05:00:00.000Z">
-<meta property="article:modified_time" content="2025-10-07T05:50:08.325Z">
+<meta property="article:published_time" content="2025-10-07T08:13:00.000Z">
+<meta property="article:modified_time" content="2025-10-07T06:20:01.859Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
 
-<title >欢迎来到我的博客！</title>
+<title >分层贝叶斯（3）：MCMC——理论与现实的桥梁</title>
 
 <!-- Favicon -->
 
@@ -61,7 +61,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"John Doe","root":"/","typed_text":["Master of AI","AI for science Learner"],"theme_version":"2.2.6","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/file.svg","icon16":"/img/file.svg","icon32":"/img/file.svg","apple_touch_icon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","show_text":"(/≧▽≦/)Hey! Good again!","hide_text":"王钰龙的个人博客"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","sticky":"TOP","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"","prefix":"The blog has been lovely to run undefined day"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2025-10-07 13:50:08"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2025-10-07 14:20:01"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.6" id="trm-switch-style">
@@ -205,7 +205,7 @@
     <div class="trm-banner">
     
     <!-- banner cover -->
-    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/780.png">
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/bys.png">
     <!-- banner cover end -->
     
 
@@ -224,7 +224,7 @@
                             NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            欢迎来到我的博客！
+                            分层贝叶斯（3）：MCMC——理论与现实的桥梁
                         </h1>
 
                         
@@ -347,13 +347,13 @@
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
-            10/01
+            10/07
         </div>
     </div>
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-clock trm-icon"></i><br>
-            13:00
+            16:13
         </div>
     </div>
     <div class="col-sm-4">
@@ -365,22 +365,114 @@
 </div>
 <div class="trm-card ">
     <article id="article-container" class="trm-publication">
-    <h2 id="🥳-博客开张大吉！"><a href="#🥳-博客开张大吉！" class="headerlink" title="🥳 博客开张大吉！"></a>🥳 博客开张大吉！</h2><p>Hello world！经过一段时间的折腾和搭建，我的个人博客终于正式上线啦！</p>
-<p>能够在这个小小的数字空间里，拥有一个完全属于自己的角落，是一件令人兴奋的事情。</p>
-<h3 id="💡-为什么搭建这个博客？"><a href="#💡-为什么搭建这个博客？" class="headerlink" title="💡 为什么搭建这个博客？"></a>💡 为什么搭建这个博客？</h3><p>我的初衷非常简单：<strong>记录、分享。</strong></p>
-<ol>
-<li><strong>记录我的成长轨迹：</strong> 我会在这里记录我在 学习和工作中的心得体会、踩过的坑以及解决方案。</li>
-<li><strong>分享经验与知识：</strong> 希望我的经验能够帮助到有同样困惑的朋友。这里将是我的知识库。</li>
-</ol>
-<h3 id="🧭-博客内容预告"><a href="#🧭-博客内容预告" class="headerlink" title="🧭 博客内容预告"></a>🧭 博客内容预告</h3><p>本站点的文章会主要聚焦于以下几个方面，请随意通过顶部的菜单探索感兴趣的内容：</p>
+    <h1 id="⚙️-分层贝叶斯：MCMC——复杂后验的采样"><a href="#⚙️-分层贝叶斯：MCMC——复杂后验的采样" class="headerlink" title="⚙️ 分层贝叶斯：MCMC——复杂后验的采样"></a>⚙️ 分层贝叶斯：MCMC——复杂后验的采样</h1><h2 id="引言：当贝叶斯遇到“维度灾难”"><a href="#引言：当贝叶斯遇到“维度灾难”" class="headerlink" title="引言：当贝叶斯遇到“维度灾难”"></a>引言：当贝叶斯遇到“维度灾难”</h2><p>在前两篇文章中，我们了解了贝叶斯推断的基础（先验、似然、后验）以及分层贝叶斯模型（HBM）如何通过<strong>超参数 $\alpha$</strong> 实现信息共享。</p>
+<p>分层模型虽然强大，但也带来了巨大的计算挑战。回想贝叶斯定理：</p>
+<p>$$P(\theta|D) \propto P(D|\theta) P(\theta)$$</p>
+<p>当我们有 $M$ 个局部参数 $\theta_m$ 和超参数 $\alpha$ 时，我们需要推断的是一个关于 $(\theta_1, \dots, \theta_M, \alpha)$ 的<strong>联合后验分布</strong>。在现实模型中，这个参数空间可能有数百甚至数千个维度。</p>
 <ul>
-<li><strong>技术探索：</strong> 深入探讨agent,llm,ml。</li>
-<li><strong>摄影作品与心得：</strong> 分享我的作品，并记录每一次快门背后的思考。</li>
-<li><strong>生活随笔：</strong> 记录一些关于效率、阅读、个人成长等非技术类的零散思考。</li>
+<li><strong>挑战：</strong> 这种高维的后验分布 $P(\theta|D)$ 形状复杂、多峰，<strong>无法通过传统的解析积分求解</strong>。  </li>
+<li><strong>解决方案：</strong> 我们需要一种方法来“近似”这个复杂的分布——这就是 <strong>马尔可夫链蒙特卡洛（Markov Chain Monte Carlo, MCMC）</strong> 采样方法。</li>
 </ul>
-<h3 id="🎉-特别鸣谢"><a href="#🎉-特别鸣谢" class="headerlink" title="🎉 特别鸣谢"></a>🎉 特别鸣谢</h3><p>最后，我要特别感谢 <strong>Hexo</strong> 框架以及 <strong>Hexo-Theme-Async</strong> 主题的作者们。正是因为有优秀的开源社区，才让我能快速搭建起如此美观且功能强大的博客。</p>
+<hr>
+<h2 id="一、从积分到采样：用“频率”逼近“密度”"><a href="#一、从积分到采样：用“频率”逼近“密度”" class="headerlink" title="一、从积分到采样：用“频率”逼近“密度”"></a>一、从积分到采样：用“频率”逼近“密度”</h2><h3 id="1-从积分的痛点说起"><a href="#1-从积分的痛点说起" class="headerlink" title="1. 从积分的痛点说起"></a>1. 从积分的痛点说起</h3><p>贝叶斯推断的核心在于后验分布：</p>
+<p>$$P(\theta|D) &#x3D; \frac{P(D|\theta)P(\theta)}{P(D)}$$</p>
+<p>其中分母：</p>
+<p>$$P(D) &#x3D; \int P(D|\theta)P(\theta), d\theta$$</p>
+<p>通常无法解析求解。<br>于是我们希望通过<strong>随机采样</strong>来逼近这个积分。</p>
+<p>如果我们能够从后验分布 $P(\theta|D)$ 中采样得到点集 ${\theta^{(1)}, \dots, \theta^{(N)}}$，那么任意函数的期望就可以近似为：</p>
+<p>$$\mathbb{E}[f(\theta)] \approx \frac{1}{N}\sum_{i&#x3D;1}^N f(\theta^{(i)})$$</p>
+<p>换句话说：<br><strong>积分太难？那就通过采样求平均。</strong></p>
+<hr>
+<h3 id="2-蒙特卡洛（Monte-Carlo）的思想"><a href="#2-蒙特卡洛（Monte-Carlo）的思想" class="headerlink" title="2. 蒙特卡洛（Monte Carlo）的思想"></a>2. 蒙特卡洛（Monte Carlo）的思想</h3><p>蒙特卡洛方法用随机抽样替代复杂计算。<br>例如：要估计一个复杂形状区域的面积，只需在外接正方形中随机撒点，通过落入目标区域的比例估算面积。</p>
+<p>同样地，在贝叶斯推断中，我们通过<strong>样本频率</strong>近似<strong>概率密度</strong>。<br>样本在后验高密度区域出现得更频繁，自然反映了后验分布的形状。</p>
+<hr>
+<h2 id="二、MCMC-的核心：让样本“走向后验”"><a href="#二、MCMC-的核心：让样本“走向后验”" class="headerlink" title="二、MCMC 的核心：让样本“走向后验”"></a>二、MCMC 的核心：让样本“走向后验”</h2><h3 id="1-马尔可夫链：带有记忆衰减的随机游走"><a href="#1-马尔可夫链：带有记忆衰减的随机游走" class="headerlink" title="1. 马尔可夫链：带有记忆衰减的随机游走"></a>1. 马尔可夫链：带有记忆衰减的随机游走</h3><p>马尔可夫链是一种<strong>无记忆性随机过程</strong>：</p>
+<p>$$P(\theta^{(t+1)}|\theta^{(t)}, \theta^{(t-1)}, \dots) &#x3D; P(\theta^{(t+1)}|\theta^{(t)})$$</p>
+<p>MCMC 的目标是构造这样一条链，使其在长期运行后，状态分布稳定地收敛到目标分布 $P(\theta|D)$。<br>只要链是<strong>不可约（Irreducible）</strong>、<strong>非周期（Aperiodic）且满足平稳性（Stationarity）</strong>，采样点就能代表后验分布。</p>
 <blockquote>
-<p>感谢开源！感谢所有贡献者！</p>
+<p>MCMC 让链在高概率区域停留更久，低概率区域更快离开。<br>链走得越久，样本分布越接近真实后验。</p>
+</blockquote>
+<hr>
+<h3 id="2-Metropolis–Hastings-算法（MH）"><a href="#2-Metropolis–Hastings-算法（MH）" class="headerlink" title="2. Metropolis–Hastings 算法（MH）"></a>2. Metropolis–Hastings 算法（MH）</h3><p>MH 是最经典的 MCMC 算法。<br>它通过“提出–接受–拒绝”的机制实现采样：</p>
+<ol>
+<li><p><strong>初始化</strong> $\theta^{(0)}$。  </p>
+</li>
+<li><p><strong>提出候选样本</strong> $\theta’$，从提议分布 $q(\theta’|\theta^{(t)})$ 生成。  </p>
+</li>
+<li><p><strong>计算接受率：</strong></p>
+<p>$$r &#x3D; \frac{P(D|\theta’) P(\theta’) q(\theta^{(t)}|\theta’)}{P(D|\theta^{(t)}) P(\theta^{(t)}) q(\theta’|\theta^{(t)})}$$</p>
+</li>
+<li><p><strong>接受或拒绝：</strong></p>
+<p>$$ \theta^{(t+1)} &#x3D;\begin{cases}\theta’, &amp; \text{以概率 } \min(1, r) \text{ 接受}\\theta^{(t)}, &amp; \text{否则保持不变}\end{cases}$$</p>
+</li>
+<li><p>重复迭代直到收敛。</p>
+</li>
+</ol>
+<p>在充分运行后，样本序列 ${\theta^{(1)}, \dots, \theta^{(N)}}$ 就服从目标后验分布。</p>
+<h2 id="三、从采样到统计：如何“读懂”后验样本"><a href="#三、从采样到统计：如何“读懂”后验样本" class="headerlink" title="三、从采样到统计：如何“读懂”后验样本"></a>三、从采样到统计：如何“读懂”后验样本</h2><p>当 MCMC 完成采样后，我们获得一系列后验样本：<br>${\theta^{(1)}, \theta^{(2)}, \dots, \theta^{(S)}}$。</p>
+<h3 id="后验统计量估计"><a href="#后验统计量估计" class="headerlink" title="后验统计量估计"></a>后验统计量估计</h3><table>
+<thead>
+<tr>
+<th align="left">统计量</th>
+<th align="left">数学定义</th>
+<th align="left">采样近似</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">后验均值</td>
+<td align="left">$\mathbb{E}[\theta|D]$</td>
+<td align="left">$\frac{1}{S}\sum_s \theta^{(s)}$</td>
+</tr>
+<tr>
+<td align="left">方差</td>
+<td align="left">$\text{Var}[\theta|D]$</td>
+<td align="left">$\frac{1}{S}\sum_s (\theta^{(s)} - \bar{\theta})^2$</td>
+</tr>
+<tr>
+<td align="left">95% 可信区间</td>
+<td align="left">$[\theta_{2.5\%},\theta_{97.5\%}]$</td>
+<td align="left">样本分位数估计</td>
+</tr>
+</tbody></table>
+<p>这些结果提供了参数估计与不确定性量化。</p>
+<hr>
+<h2 id="四、从采样到预测：贝叶斯式前瞻"><a href="#四、从采样到预测：贝叶斯式前瞻" class="headerlink" title="四、从采样到预测：贝叶斯式前瞻"></a>四、从采样到预测：贝叶斯式前瞻</h2><p>MCMC 的威力不仅在于“知道参数”，更在于“用参数预测未来”。</p>
+<h3 id="1-贝叶斯预测分布"><a href="#1-贝叶斯预测分布" class="headerlink" title="1. 贝叶斯预测分布"></a>1. 贝叶斯预测分布</h3><p>$$P(\tilde{D}|D) &#x3D; \int P(\tilde{D}|\theta) P(\theta|D), d\theta$$</p>
+<p>利用采样点近似：</p>
+<p>$$P(\tilde{D}|D) \approx \frac{1}{S} \sum_{s&#x3D;1}^S P(\tilde{D}|\theta^{(s)})$$</p>
+<h3 id="2-实现步骤"><a href="#2-实现步骤" class="headerlink" title="2. 实现步骤"></a>2. 实现步骤</h3><ol>
+<li>从后验样本集中随机选取 $\theta^{(s)}$。  </li>
+<li>代入似然函数 $P(\tilde{D}|\theta^{(s)})$，生成预测数据。  </li>
+<li>汇总所有模拟结果，得到预测分布 $P(\tilde{D}|D)$。</li>
+</ol>
+<p>这种方法自然地将参数不确定性传播到预测结果中，使预测更加稳健。</p>
+<hr>
+<h2 id="五、小结：让不可算的积分变得可行"><a href="#五、小结：让不可算的积分变得可行" class="headerlink" title="五、小结：让不可算的积分变得可行"></a>五、小结：让不可算的积分变得可行</h2><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>目标</th>
+<th>MCMC 的作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>参数推断</td>
+<td>$P(\theta|D)$</td>
+<td>构造马尔可夫链采样逼近后验</td>
+</tr>
+<tr>
+<td>不确定性评估</td>
+<td>$\mathbb{E}[f(\theta)|D]$</td>
+<td>用采样均值替代积分</td>
+</tr>
+<tr>
+<td>预测阶段</td>
+<td>$P(\tilde{D}|D)$</td>
+<td>基于后验样本模拟未来数据</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>*<strong>MCMC 是贝叶斯思想的与现实的桥梁。</strong><br>它让“不可积”的概率世界，通过采样变得可触、可算、可解释。</p>
 </blockquote>
 
 </article>
@@ -399,10 +491,10 @@
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2025/10/05/%E9%9A%8F%E8%AE%B0%EF%BC%881%EF%BC%89/" class="trm-cover-frame trm-anima-link">
+        <a href="/2025/10/10/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%98%85%E8%AF%BB/" class="trm-cover-frame trm-anima-link">
             
             
-                <img alt="cover" class="no-fancybox" src="/img/sea_llm.png">
+                <img alt="cover" class="no-fancybox" src="/img/ai4s.png">
             
         </a>
         
@@ -413,14 +505,14 @@
                 </a>
             </div>
             <h5>
-                <a href="/2025/10/05/%E9%9A%8F%E8%AE%B0%EF%BC%881%EF%BC%89/" class="trm-anima-link">
-                    随记（1）
+                <a href="/2025/10/10/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%98%85%E8%AF%BB/" class="trm-anima-link">
+                    AI4S：科学文献知识结构化
                 </a>
             </h5>
             <div class="trm-divider trm-mb-20 trm-mt-20"></div>
             <ul class="trm-card-data trm-label">
-                <li>25/10/05</li>
-                <li>13:57</li>
+                <li>25/10/10</li>
+                <li>15:30</li>
                 
                 
             </ul>
@@ -428,6 +520,37 @@
     </div>
 </div>
     
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2025/10/07/2%EF%BC%89%E5%88%86%E5%B1%82%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95%20/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/bys.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E7%AE%97%E6%B3%95/">
+                    算法
+                </a>
+            </div>
+            <h5>
+                <a href="/2025/10/07/2%EF%BC%89%E5%88%86%E5%B1%82%E8%B4%9D%E5%8F%B6%E6%96%AF%EF%BC%9A%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95%20/" class="trm-anima-link">
+                    分层贝叶斯（2）：从参数到分层
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>25/10/07</li>
+                <li>11:52</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
     
 </div>
 
